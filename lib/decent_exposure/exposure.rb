@@ -82,6 +82,7 @@ module DecentExposure
       normalize_parent_option
       normalize_from_option
       normalize_find_by_option
+      normalize_model_namespace_option
     end
 
     def normalize_fetch_option
@@ -135,6 +136,12 @@ module DecentExposure
         end
 
         -> { model }
+      end
+    end
+
+    def normalize_model_namespace_option
+      normalize_non_proc_option :model_namespace do |value|
+        -> { value.to_s }
       end
     end
 
