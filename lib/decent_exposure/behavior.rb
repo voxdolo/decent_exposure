@@ -41,7 +41,7 @@ module DecentExposure
     #
     # Returns a standard Class name.
     def model
-      name.to_s.classify.constantize
+      [model_namespace, name.to_s.classify].compact.join('::').constantize
     end
 
     # Public: Find an object on the supplied scope.
@@ -84,6 +84,10 @@ module DecentExposure
     end
 
     protected
+    def model_namespace
+      options[:model_namespace].to_s
+    end
+
 
     def params_id_key_candidates
       ["#{model_param_key}_id", "#{name}_id", "id"].uniq
